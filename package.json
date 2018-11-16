@@ -1,0 +1,39 @@
+{
+  "name": "pc-nrfconnect-tracecollector",
+  "version": "0.0.1",
+  "description": "Capture modem trace of nRF91",
+  "displayName": "Trace Collector",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NordicSemiconductor/pc-nrfconnect-tracecollector.git"
+  },
+  "author": "Nordic Semiconductor ASA",
+  "license": "SEE LICENSE IN LICENSE",
+  "engines": {
+    "nrfconnect": "^2.6.0"
+  },
+  "main": "dist/bundle.js",
+  "files": [
+    "dist/",
+    "icon.png",
+    "LICENSE"
+  ],
+  "scripts": {
+    "dev": "nrfconnect-scripts build-watch",
+    "webpack": "nrfconnect-scripts build-dev",
+    "build": "nrfconnect-scripts build-prod",
+    "lint": "nrfconnect-scripts lint components reducers index.jsx",
+    "lintfix": "nrfconnect-scripts lint --fix components reducers index.jsx",
+    "test": "nrfconnect-scripts test",
+    "test-watch": "nrfconnect-scripts test --watch",
+    "clean": "npm run clean-dist && npm run clean-modules",
+    "clean-dist": "rimraf dist",
+    "clean-modules": "rimraf \"node_modules/!(rimraf|.bin)\""
+  },
+  "devDependencies": {
+    "check-disk-space": "^1.5.0",
+    "pc-nrfconnect-devdep": "git+https://github.com/NordicSemiconductor/pc-nrfconnect-devdep.git#semver:^1.3.5",
+    "pretty-bytes": "^5.1.0"
+  },
+  "dependencies": {}
+}

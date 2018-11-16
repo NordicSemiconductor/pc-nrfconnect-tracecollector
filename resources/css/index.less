@@ -1,0 +1,58 @@
+// This file is imported by index.jsx, and may contain styles for the app.
+.core-main-area {
+    min-width: initial;
+}
+.core-main-view {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .btn {
+        width: fit-content;
+    }
+    .btn.capture {
+        width: 110px;
+        height: 110px;
+        border-radius: 55px;
+    }
+    .btn.capture:focus {
+        outline: none;
+    }
+
+    .panel, .alert-info {
+        width: 80%;
+        padding: 40px;
+        display: flex;
+        justify-content: center;
+        position: relative;
+
+        .panel-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-right: 15%;
+
+            > * { align-self: center; }
+        }
+        i { padding: 0 5px; }
+    }
+    .panel {
+        justify-content: flex-end;
+    }
+
+    .stats {
+        position: absolute;
+        top: 40px;
+        left: 40px;
+    }
+
+    .panel.latest-file {
+        padding: 10px 40px;
+
+        .filename {
+            user-select: text;
+            font-style: italic;
+        }
+    }
+}
