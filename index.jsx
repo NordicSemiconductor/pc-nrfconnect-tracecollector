@@ -43,6 +43,7 @@ import './resources/css/index.less';
 /* eslint-disable react/prop-types, no-unused-vars */
 
 const supportedBoards = ['PCA10090'];
+const platform = process.platform.slice(0, 3);
 
 // App configuration
 // =================
@@ -66,6 +67,41 @@ export const config = {
     },
 };
 
+/**
+ * Temporary workaround for macOS where serialports of PCA10090 can't be properly identified yet.
+ * This function returns an array of devices where any device with 3 serialports are converted
+ * to 3 devices with 1 serialport each, so the user will be able to select any of the ports.
+ *
+ * @param {Array<device>} devices array of device-lister device objects
+ * @return {Array<device>} fixed array
+ */
+function fixDevices(devices) {
+    if (platform !== 'dar') {
+        return devices;
+    }
+    const fixedDevices = [];
+    devices.forEach(device => {
+        const { serialNumber } = device;
+        if (device.serialport && device['serialport.1'] && device['serialport.2']) {
+            const temp = [{ ...device }, { ...device }, { ...device }];
+            temp[1].serialport = temp[1]['serialport.1'];
+            temp[2].serialport = temp[2]['serialport.2'];
+            delete temp[0]['serialport.1'];
+            delete temp[0]['serialport.2'];
+            delete temp[1]['serialport.1'];
+            delete temp[1]['serialport.2'];
+            delete temp[2]['serialport.1'];
+            delete temp[2]['serialport.2'];
+            temp[0].serialNumber = `${serialNumber}#0`;
+            temp[1].serialNumber = `${serialNumber}#1`;
+            temp[2].serialNumber = `${serialNumber}#2`;
+            fixedDevices.push(...temp);
+        } else {
+            fixedDevices.push(device);
+        }
+    });
+    return fixedDevices;
+}
 
 // Component decoration
 // ====================
@@ -82,8 +118,8 @@ export function decorateDeviceSelector(DeviceSelector) {
     return props => {
         const { devices, ...rest } = props;
         const filteredDevices = devices.filter(d => supportedBoards.includes(d.boardVersion));
-
-        return <DeviceSelector {...rest} devices={filteredDevices} />;
+        const fixedDevices = fixDevices(filteredDevices);
+        return <DeviceSelector {...rest} devices={fixedDevices} />;
     };
 }
 
@@ -133,17 +169,16 @@ export const reduceApp = reducers;
  */
 function pickSerialPort(serialports) {
     if (serialports.length === 1) {
-        // Just in case a PCA10064 is selected
+        // In macOS case when serialports are split
         return serialports[0];
     }
-    switch (process.platform.slice(0, 3)) {
+    switch (platform) {
         case 'win':
             return serialports.find(s => (/MI_04/.test(s.pnpId)));
         case 'lin':
             return serialports.find(s => (/-if04$/.test(s.pnpId)));
         case 'dar':
-            // TODO: figure out how to identify the correct serialport
-            // return serialports.find(s => (/1$/.test(s.comName)));
+            // this doesn't work, but with fixDevices() can't happen
             break;
         default:
     }
