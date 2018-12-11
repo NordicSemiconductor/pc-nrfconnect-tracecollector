@@ -1,13 +1,48 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Hello should render component with custom title 1`] = `
-<h3>
-  Test title
-</h3>
-`;
-
-exports[`Hello should render component with default title 1`] = `
-<h3>
-  default title
-</h3>
+exports[`MainView should render component 1`] = `
+<div
+  className="core-main-view"
+>
+  <div
+    className="content panel panel-primary"
+  >
+    <div
+      className="panel-body"
+    >
+      <button
+        className="capture btn btn-danger"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        Stop
+         Capture
+      </button>
+      <div
+        className="stats"
+      >
+        <p>
+          Disk space: 
+          1 kB
+           free of 
+          2 kB
+        </p>
+        0
+        <p>
+          Latest tracefile: 
+          file
+        </p>
+        <button
+          className="btn btn-default"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Show in folder
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 `;

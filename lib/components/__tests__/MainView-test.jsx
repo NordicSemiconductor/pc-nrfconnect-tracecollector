@@ -36,12 +36,21 @@
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Hello from '../MainView';
+import MainView from '../MainView';
 
 describe('MainView', () => {
     it('should render component', () => {
         expect(renderer.create(
-            <MainView />,
+            <MainView
+                isConnected
+                running
+                toggleCapture={() => {}}
+                bytesWritten={0}
+                freeDiskSpace={1000}
+                totalDiskSpace={2000}
+                filePath="/path/to/file"
+                showItemInFolder={() => {}}
+            />,
         )).toMatchSnapshot();
     });
 });
