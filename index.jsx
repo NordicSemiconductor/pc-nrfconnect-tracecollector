@@ -36,7 +36,9 @@
 
 import React from 'react';
 import MainView from './lib/containers/mainView';
+import SidePanel from './lib/containers/sidePanel';
 import * as DeviceActions from './lib/actions/deviceActions';
+import { loadSettings } from './lib/actions/uiActions';
 import reducers from './lib/reducers';
 import './resources/css/index.less';
 
@@ -73,38 +75,47 @@ export const config = {
  * to 3 devices with 1 serialport each, so the user will be able to select any of the ports.
  *
  * @param {Array<device>} devices array of device-lister device objects
+ * @param {bool} autoDeviceFilter indicates if functionality is desired or not toggled by the UI
  * @return {Array<device>} fixed array
  */
-function fixDevices(devices) {
-    if (platform !== 'dar') {
+function fixDevices(devices, autoDeviceFilter) {
+    if (platform !== 'dar' && autoDeviceFilter) {
         return devices;
     }
     const fixedDevices = [];
     devices.forEach(device => {
         const { serialNumber } = device;
-        if (device.serialport && device['serialport.1'] && device['serialport.2']) {
-            const temp = [{ ...device }, { ...device }, { ...device }];
-            temp[1].serialport = temp[1]['serialport.1'];
-            temp[2].serialport = temp[2]['serialport.2'];
-            delete temp[0]['serialport.1'];
-            delete temp[0]['serialport.2'];
-            delete temp[1]['serialport.1'];
-            delete temp[1]['serialport.2'];
-            delete temp[2]['serialport.1'];
-            delete temp[2]['serialport.2'];
+        const temp = [{ ...device }];
+        let i = 1;
+        while (device[`serialport.${i}`]) {
+            temp[i] = {
+                ...temp[0],
+                serialport: { ...temp[0][`serialport.${i}`] },
+                serialNumber: `${serialNumber}#${i}`,
+            };
             temp[0].serialNumber = `${serialNumber}#0`;
-            temp[1].serialNumber = `${serialNumber}#1`;
-            temp[2].serialNumber = `${serialNumber}#2`;
-            fixedDevices.push(...temp);
-        } else {
-            fixedDevices.push(device);
+            delete temp[0][`serialport.${i}`];
+            let k = 1;
+            while (temp[i][`serialport.${k}`]) {
+                delete temp[i][`serialport.${k}`];
+                k += 1;
+            }
+            i += 1;
         }
+        fixedDevices.push(...temp);
     });
     return fixedDevices;
 }
 
 // Component decoration
 // ====================
+
+export function mapDeviceSelectorState(state, props) {
+    return {
+        autoDeviceFilter: state.app.ui.autoDeviceFilter,
+        ...props,
+    };
+}
 
 /**
  * Decorates the core DeviceSelector component, which is rendered in the
@@ -116,9 +127,11 @@ function fixDevices(devices) {
  */
 export function decorateDeviceSelector(DeviceSelector) {
     return props => {
-        const { devices, ...rest } = props;
-        const filteredDevices = devices.filter(d => supportedBoards.includes(d.boardVersion));
-        const fixedDevices = fixDevices(filteredDevices);
+        const { devices, autoDeviceFilter, ...rest } = props;
+        const filteredDevices = autoDeviceFilter
+            ? devices.filter(d => supportedBoards.includes(d.boardVersion))
+            : devices;
+        const fixedDevices = fixDevices(filteredDevices, autoDeviceFilter);
         return <DeviceSelector {...rest} devices={fixedDevices} />;
     };
 }
@@ -145,8 +158,10 @@ export function decorateMainView() {
  * @param {Function} SidePanel The core SidePanel component.
  * @returns {Function} A new React component.
  */
-export function decorateSidePanel(SidePanel) {
-    return props => null;
+export function decorateSidePanel() {
+    return props => (
+        <SidePanel {...props} />
+    );
 }
 
 // Adding information to state
@@ -227,4 +242,8 @@ export function middleware(store) {
 
         next(action);
     };
+}
+
+export function onReady(dispatch, getState) {
+    dispatch(loadSettings());
 }

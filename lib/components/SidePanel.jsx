@@ -36,59 +36,58 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Alert, Panel } from 'react-bootstrap';
-import { basename } from 'path';
-import prettyBytes from 'pretty-bytes';
+import { Button, Checkbox, Panel } from 'react-bootstrap';
 
-const informationPanel = (
-    <Alert bsStyle="info">
-        Open the DevKit in <i>Select device</i> menu.
-    </Alert>
-);
-
-const MainView = ({
+const SidePanel = ({
     isConnected,
-    bytesWritten,
-    freeDiskSpace,
-    totalDiskSpace,
+    running,
+    toggleCapture,
+    autoDeviceFilter,
+    autoDeviceFilterToggled,
     filePath,
+    showItemInFolder,
 }) => (
-    <div className="core-main-view">
-        { !isConnected && informationPanel }
-        { isConnected &&
-            <Panel className="content" bsStyle="primary">
-                <div className="stats">
-                    { freeDiskSpace &&
-                        <p>Disk space: { prettyBytes(freeDiskSpace) } free
-                            of { prettyBytes(totalDiskSpace) }</p>
-                    }
-                    { bytesWritten &&
-                        <p>Trace size: { prettyBytes(bytesWritten) }</p>
-                    }
-                    { filePath &&
-                        <p>Latest tracefile:&nbsp;
-                            { basename(filePath) }
-                        </p>
-                    }
-                </div>
-            </Panel>
-        }
+    <div className="core-side-panel">
+        <Panel header="Capture">
+            <Button
+                className="capture"
+                bsStyle={running ? 'danger' : 'primary'}
+                bsSize="large"
+                onClick={toggleCapture}
+                disabled={!isConnected}
+            >
+                { running ? 'Stop' : 'Start' } Capture
+            </Button>
+            <Button
+                onClick={showItemInFolder}
+                disabled={!filePath}
+            >
+                Show capture in folder
+            </Button>
+        </Panel>
+        <Panel header="Settings">
+            <Checkbox
+                onChange={e => autoDeviceFilterToggled(e.target.checked)}
+                checked={autoDeviceFilter}
+            >
+                Auto device/port filter
+            </Checkbox>
+        </Panel>
     </div>
 );
 
-MainView.propTypes = {
+SidePanel.propTypes = {
     isConnected: PropTypes.bool.isRequired,
-    bytesWritten: PropTypes.number,
-    freeDiskSpace: PropTypes.number,
-    totalDiskSpace: PropTypes.number,
+    running: PropTypes.bool.isRequired,
+    toggleCapture: PropTypes.func.isRequired,
+    autoDeviceFilter: PropTypes.bool.isRequired,
+    autoDeviceFilterToggled: PropTypes.func.isRequired,
     filePath: PropTypes.string,
+    showItemInFolder: PropTypes.func.isRequired,
 };
 
-MainView.defaultProps = {
-    bytesWritten: null,
-    freeDiskSpace: null,
-    totalDiskSpace: null,
+SidePanel.defaultProps = {
     filePath: null,
 };
 
-export default MainView;
+export default SidePanel;

@@ -43,13 +43,10 @@ describe('MainView', () => {
         expect(renderer.create(
             <MainView
                 isConnected
-                running
-                toggleCapture={() => {}}
                 bytesWritten={0}
                 freeDiskSpace={1000}
                 totalDiskSpace={2000}
                 filePath="/path/to/file"
-                showItemInFolder={() => {}}
             />,
         )).toMatchSnapshot();
     });
