@@ -40,7 +40,7 @@ import SidePanel from './lib/containers/sidePanel';
 import * as DeviceActions from './lib/actions/deviceActions';
 import { loadSettings } from './lib/actions/uiActions';
 import reducers from './lib/reducers';
-import './resources/css/index.less';
+import './resources/css/index.scss';
 
 /* eslint-disable react/prop-types, no-unused-vars */
 
@@ -76,7 +76,7 @@ export const config = {
  *
  * @param {Array<device>} devices array of device-lister device objects
  * @param {bool} autoDeviceFilter indicates if functionality is desired or not toggled by the UI
- * @return {Array<device>} fixed array
+ * @returns {Array<device>} fixed array
  */
 function fixDevices(devices, autoDeviceFilter) {
     if (platform !== 'dar' && autoDeviceFilter) {
@@ -180,7 +180,7 @@ export const reduceApp = reducers;
 /**
  * Pick the serialport that should belong to the modem on PCA10090
  * @param {Array<device>} serialports array of device-lister serialport objects
- * @return {object} the selected serialport object
+ * @returns {object} the selected serialport object
  */
 function pickSerialPort(serialports) {
     if (serialports.length === 1) {

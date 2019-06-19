@@ -36,12 +36,13 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Alert, Panel } from 'react-bootstrap';
+import Alert from 'react-bootstrap/Alert';
+import Card from 'react-bootstrap/Card';
 import { basename } from 'path';
 import prettyBytes from 'pretty-bytes';
 
 const informationPanel = (
-    <Alert bsStyle="info">
+    <Alert variant="info">
         Open the DevKit in <i>Select device</i> menu.
     </Alert>
 );
@@ -55,24 +56,25 @@ const MainView = ({
 }) => (
     <div className="core-main-view">
         { !isConnected && informationPanel }
-        { isConnected &&
-            <Panel className="content" bsStyle="primary">
+        { isConnected && (
+            <Card className="content" variant="primary">
                 <div className="stats">
-                    { freeDiskSpace &&
+                    { freeDiskSpace && (
                         <p>Disk space: { prettyBytes(freeDiskSpace) } free
-                            of { prettyBytes(totalDiskSpace) }</p>
-                    }
-                    { bytesWritten &&
+                            of { prettyBytes(totalDiskSpace) }
+                        </p>
+                    )}
+                    { bytesWritten && (
                         <p>Trace size: { prettyBytes(bytesWritten) }</p>
-                    }
-                    { filePath &&
+                    )}
+                    { filePath && (
                         <p>Latest tracefile:&nbsp;
                             { basename(filePath) }
                         </p>
-                    }
+                    )}
                 </div>
-            </Panel>
-        }
+            </Card>
+        )}
     </div>
 );
 
