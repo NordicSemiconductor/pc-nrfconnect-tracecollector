@@ -5,26 +5,23 @@ exports[`MainView should render component 1`] = `
   className="core-main-view"
 >
   <div
-    className="content panel panel-primary"
+    className="content card"
+    variant="primary"
   >
     <div
-      className="panel-body"
+      className="stats"
     >
-      <div
-        className="stats"
-      >
-        <p>
-          Disk space: 
-          1 kB
-           free of 
-          2 kB
-        </p>
-        0
-        <p>
-          Latest tracefile: 
-          file
-        </p>
-      </div>
+      <p>
+        Disk space: 
+        1 kB
+         free of 
+        2 kB
+      </p>
+      0
+      <p>
+        Latest tracefile: 
+        file
+      </p>
     </div>
   </div>
 </div>
