@@ -36,7 +36,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Checkbox, Panel } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
 
 const SidePanel = ({
     isConnected,
@@ -48,31 +50,42 @@ const SidePanel = ({
     showItemInFolder,
 }) => (
     <div className="core-side-panel">
-        <Panel header="Capture">
-            <Button
-                className="capture"
-                bsStyle={running ? 'danger' : 'primary'}
-                bsSize="large"
-                onClick={toggleCapture}
-                disabled={!isConnected}
-            >
-                { running ? 'Stop' : 'Start' } Capture
-            </Button>
-            <Button
-                onClick={showItemInFolder}
-                disabled={!filePath}
-            >
-                Show capture in folder
-            </Button>
-        </Panel>
-        <Panel header="Settings">
-            <Checkbox
-                onChange={e => autoDeviceFilterToggled(e.target.checked)}
-                checked={autoDeviceFilter}
-            >
-                Auto device/port filter
-            </Checkbox>
-        </Panel>
+        <Card>
+            <Card.Header>Capture</Card.Header>
+            <Card.Body>
+                <div className="d-flex flex-column">
+                    <Button
+                        className="capture"
+                        variant={running ? 'danger' : 'primary'}
+                        size="lg"
+                        onClick={toggleCapture}
+                        disabled={!isConnected}
+                    >
+                        { running ? 'Stop' : 'Start' } Capture
+                    </Button>
+                    <Button
+                        onClick={showItemInFolder}
+                        disabled={!filePath}
+                        variant="light"
+                    >
+                        Show capture in folder
+                    </Button>
+                </div>
+            </Card.Body>
+        </Card>
+        <Card>
+            <Card.Header>Settings</Card.Header>
+            <Card.Body>
+                <Form.Group controlId="portFilterCheck">
+                    <Form.Check
+                        type="checkbox"
+                        onChange={e => autoDeviceFilterToggled(e.target.checked)}
+                        checked={autoDeviceFilter}
+                        label="Auto device/port filter"
+                    />
+                </Form.Group>
+            </Card.Body>
+        </Card>
     </div>
 );
 
