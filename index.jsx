@@ -113,6 +113,7 @@ function fixDevices(devices, autoDeviceFilter) {
 export function mapDeviceSelectorState(state, props) {
     return {
         autoDeviceFilter: state.app.ui.autoDeviceFilter,
+        portIndicatorStatus: (state.app.device.deviceName !== null) ? 'on' : 'off',
         ...props,
     };
 }
