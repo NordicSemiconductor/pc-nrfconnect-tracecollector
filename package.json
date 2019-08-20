@@ -22,6 +22,7 @@
     "dev": "nrfconnect-scripts build-watch",
     "webpack": "nrfconnect-scripts build-dev",
     "build": "nrfconnect-scripts build-prod",
+    "lint-init": "nrfconnect-scripts lint-init",
     "lint": "nrfconnect-scripts lint components reducers index.jsx",
     "lintfix": "nrfconnect-scripts lint --fix components reducers index.jsx",
     "nordic-publish": "nrfconnect-scripts nordic-publish",
@@ -33,7 +34,7 @@
   },
   "devDependencies": {
     "check-disk-space": "^1.5.0",
-    "pc-nrfconnect-devdep": "git+https://github.com/NordicSemiconductor/pc-nrfconnect-devdep.git#semver:^3.0.0",
+    "pc-nrfconnect-devdep": "git+https://github.com/NordicSemiconductor/pc-nrfconnect-devdep.git#semver:^3.1.0",
     "pretty-bytes": "^5.1.0"
   },
   "dependencies": {
