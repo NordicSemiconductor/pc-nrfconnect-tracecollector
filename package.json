@@ -1,6 +1,6 @@
 {
   "name": "pc-nrfconnect-tracecollector",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Capture modem trace of nRF91",
   "displayName": "Trace Collector",
   "repository": {
@@ -22,8 +22,9 @@
     "dev": "nrfconnect-scripts build-watch",
     "webpack": "nrfconnect-scripts build-dev",
     "build": "nrfconnect-scripts build-prod",
-    "lint": "nrfconnect-scripts lint components reducers index.jsx",
-    "lintfix": "nrfconnect-scripts lint --fix components reducers index.jsx",
+    "lint-init": "nrfconnect-scripts lint-init",
+    "lint": "nrfconnect-scripts lint lib index.jsx",
+    "lintfix": "nrfconnect-scripts lint --fix lib index.jsx",
     "nordic-publish": "nrfconnect-scripts nordic-publish",
     "test": "nrfconnect-scripts test",
     "test-watch": "nrfconnect-scripts test --watch",
@@ -33,7 +34,7 @@
   },
   "devDependencies": {
     "check-disk-space": "^1.5.0",
-    "pc-nrfconnect-devdep": "git+https://github.com/NordicSemiconductor/pc-nrfconnect-devdep.git#semver:^3.0.0",
+    "pc-nrfconnect-devdep": "git+https://github.com/NordicSemiconductor/pc-nrfconnect-devdep.git#semver:3.3.0",
     "pretty-bytes": "^5.1.0"
   },
   "dependencies": {
