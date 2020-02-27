@@ -35,6 +35,7 @@
  */
 
 import React from 'react';
+import { logger } from 'nrfconnect/core';
 import MainView from './lib/containers/mainView';
 import SidePanel from './lib/containers/sidePanel';
 import * as DeviceActions from './lib/actions/deviceActions';
@@ -44,7 +45,7 @@ import './resources/css/index.scss';
 
 /* eslint-disable react/prop-types, no-unused-vars */
 
-const supportedBoards = ['PCA10090'];
+const supportedBoards = ['PCA10090', 'PCA20035'];
 const platform = process.platform.slice(0, 3);
 
 // App configuration
@@ -71,14 +72,26 @@ export const config = {
 
 /**
  * Temporary workaround for macOS where serialports of PCA10090 can't be properly identified yet.
- * This function returns an array of devices where any device with 3 serialports are converted
- * to 3 devices with 1 serialport each, so the user will be able to select any of the ports.
+ * This function returns an array of devices where any device with many serialports are converted
+ * to many devices with 1 serialport each, so the user will be able to select any of the ports.
  *
- * @param {Array<device>} devices array of device-lister device objects
+ * @param {Array<device>} coreDevices array of device-lister device objects
  * @param {bool} autoDeviceFilter indicates if functionality is desired or not toggled by the UI
  * @returns {Array<device>} fixed array
  */
-function fixDevices(devices, autoDeviceFilter) {
+function fixDevices(coreDevices, autoDeviceFilter) {
+    const devices = coreDevices.map(device => {
+        const { serialNumber, boardVersion } = device;
+        if (serialNumber.startsWith('PCA')) {
+            const [b, s] = serialNumber.split('_');
+            return {
+                ...device,
+                boardVersion: b,
+                serialNumber: s.toUpperCase(),
+            };
+        }
+        return { ...device, serialNumber, boardVersion };
+    });
     if (platform !== 'dar' && autoDeviceFilter) {
         return devices;
     }
@@ -190,9 +203,9 @@ function pickSerialPort(serialports) {
     }
     switch (platform) {
         case 'win':
-            return serialports.find(s => (/MI_04/.test(s.pnpId)));
+            return serialports.find(s => (/MI_0[34]/.test(s.pnpId)));
         case 'lin':
-            return serialports.find(s => (/-if04$/.test(s.pnpId)));
+            return serialports.find(s => (/-if0[34]$/.test(s.pnpId)));
         case 'dar':
             // this doesn't work, but with fixDevices() can't happen
             break;
@@ -220,7 +233,7 @@ function pickSerialPort(serialports) {
  * @param {Object} store The Redux store.
  * @returns {Function} The Redux middleware implementation.
  */
-export function middleware(store) {
+export function middleware({ dispatch }) {
     return next => action => {
         if (!action) {
             return;
@@ -234,11 +247,15 @@ export function middleware(store) {
 
             const serialport = pickSerialPort(serialports);
             if (serialport) {
-                store.dispatch(DeviceActions.open(serialport));
+                dispatch(DeviceActions.open(serialport));
+            } else {
+                logger.error('Couldn\'t identify serial port');
+                dispatch({ type: 'DEVICE_DESELECTED' });
+                return;
             }
         }
         if (action.type === 'DEVICE_DESELECTED') {
-            store.dispatch(DeviceActions.close());
+            dispatch(DeviceActions.close());
         }
 
         next(action);
