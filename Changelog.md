@@ -1,3 +1,7 @@
+## Version 1.0.2
+### Fixes
+- Fix missing icon
+
 ## Version 1.0.1
 ### Updates
 - Add support for Thingy:91 #17
