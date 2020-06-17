@@ -1,3 +1,7 @@
+## Version 1.0.3
+### Fixes
+- Open folder window in the foreground #21
+
 ## Version 1.0.2
 ### Fixes
 - Fix missing icon
