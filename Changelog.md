@@ -1,3 +1,7 @@
+## Version 1.0.4
+### Updates
+- Device filter updated for Thingy:91 #23
+
 ## Version 1.0.3
 ### Fixes
 - Open folder window in the foreground #21
