@@ -45,7 +45,7 @@ import './resources/css/index.scss';
 
 /* eslint-disable react/prop-types, no-unused-vars */
 
-const supportedBoards = ['PCA10090', 'PCA20035'];
+const supportedBoards = ['PCA10090', 'PCA20035', 'THINGY91'];
 const platform = process.platform.slice(0, 3);
 
 // App configuration
