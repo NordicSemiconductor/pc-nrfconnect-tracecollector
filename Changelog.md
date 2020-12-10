@@ -1,6 +1,6 @@
 ## Version 1.0.6
 ### Updates
-- Updated auto device filter for macOS
+- Updated auto device filter for macOS #25
 
 ## Version 1.0.5
 ### Fixes
