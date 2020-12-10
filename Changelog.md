@@ -1,3 +1,7 @@
+## Version 1.0.6
+### Updates
+- Updated auto device filter for macOS
+
 ## Version 1.0.5
 ### Fixes
 - Fix device filter for Thingy:91 #24
