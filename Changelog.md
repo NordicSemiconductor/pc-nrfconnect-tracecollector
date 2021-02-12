@@ -1,3 +1,7 @@
+## Versio 1.0.7
+### Fixes
+- Filtered out devices without serialport that caused crash #28
+
 ## Version 1.0.6
 ### Updates
 - Updated auto device filter for macOS #25

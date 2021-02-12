@@ -68,7 +68,6 @@ const portPath = serialPort => serialPort.path || serialPort.comName;
  */
 export const config = {
     selectorTraits: {
-        jlink: true,
         serialport: true,
     },
 };
