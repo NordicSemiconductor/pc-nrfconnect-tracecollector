@@ -45,8 +45,11 @@ import './resources/css/index.scss';
 
 /* eslint-disable react/prop-types, no-unused-vars */
 
-const supportedBoards = ['PCA10090', 'PCA20035'];
+const supportedBoards = ['PCA10090', 'PCA20035', 'THINGY91'];
 const platform = process.platform.slice(0, 3);
+
+// Prefer to use the serialport 8 property or fall back to the serialport 7 property
+const portPath = serialPort => serialPort.path || serialPort.comName;
 
 // App configuration
 // =================
@@ -65,7 +68,6 @@ const platform = process.platform.slice(0, 3);
  */
 export const config = {
     selectorTraits: {
-        jlink: true,
         serialport: true,
     },
 };
@@ -81,38 +83,43 @@ export const config = {
  */
 function fixDevices(coreDevices, autoDeviceFilter) {
     const devices = coreDevices.map(device => {
-        const { serialNumber, boardVersion } = device;
-        if (serialNumber.startsWith('PCA')) {
-            const [b, s] = serialNumber.split('_');
+        const { serialNumber } = device;
+        const sn = serialNumber.toUpperCase();
+        if (sn.startsWith('PCA') || sn.startsWith('THINGY91')) {
+            const [b, s] = sn.split('_');
             return {
                 ...device,
                 boardVersion: b,
-                serialNumber: s.toUpperCase(),
+                serialNumber: s,
             };
         }
-        return { ...device, serialNumber, boardVersion };
+        return device;
     });
-    if (platform !== 'dar' && autoDeviceFilter) {
+    if (autoDeviceFilter) {
         return devices;
     }
     const fixedDevices = [];
     devices.forEach(device => {
-        const { serialNumber } = device;
-        const temp = [{ ...device }];
+        const {
+            serialNumber,
+            boardVersion,
+            traits,
+            serialport,
+        } = device;
+        const temp = [{
+            serialNumber: `${serialNumber}#0`,
+            boardVersion,
+            traits,
+            serialport,
+        }];
         let i = 1;
         while (device[`serialport.${i}`]) {
             temp[i] = {
-                ...temp[0],
-                serialport: { ...temp[0][`serialport.${i}`] },
+                boardVersion,
+                traits,
+                serialport: { ...device[`serialport.${i}`] },
                 serialNumber: `${serialNumber}#${i}`,
             };
-            temp[0].serialNumber = `${serialNumber}#0`;
-            delete temp[0][`serialport.${i}`];
-            let k = 1;
-            while (temp[i][`serialport.${k}`]) {
-                delete temp[i][`serialport.${k}`];
-                k += 1;
-            }
             i += 1;
         }
         fixedDevices.push(...temp);
@@ -208,7 +215,7 @@ function pickSerialPort(serialports) {
             return serialports.find(s => (/-if0[34]$/.test(s.pnpId)));
         case 'dar':
             // this doesn't work, but with fixDevices() can't happen
-            break;
+            return serialports.find(s => (/3$/.test(portPath(s))));
         default:
     }
     return undefined;
@@ -247,7 +254,8 @@ export function middleware({ dispatch }) {
 
             const serialport = pickSerialPort(serialports);
             if (serialport) {
-                dispatch(DeviceActions.open(serialport));
+                console.log(serialport);
+                dispatch(DeviceActions.open(portPath(serialport)));
             } else {
                 logger.error('Couldn\'t identify serial port');
                 dispatch({ type: 'DEVICE_DESELECTED' });
