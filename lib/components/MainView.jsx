@@ -44,9 +44,17 @@ import prettyBytes from 'pretty-bytes';
 const informationPanel = (
     <>
         <Alert variant="info" style={{ flexDirection: 'column' }}>
-            <p>A technical preview of the upcoming <b>Cellular Monitor</b> app has been released. That app provides the same functionality as Trace Collector, however, it also provides the functionality to convert some of the content of the trace files as PCAP, which can then be visualized in e.g. <em>Wireshark</em>.</p>
+            <p>
+                A technical preview of the upcoming <b>Cellular Monitor</b> app has been released.
+                That app provides the same functionality as Trace Collector, however, it also
+                provides the functionality to convert some of the content of the trace files as
+                PCAP, which can then be visualized in e.g. <em>Wireshark</em>.
+            </p>
 
-            <p>Give it a try by looking for <b>Cellular Monitor</b> in the list of all apps in <b>nRF Connect for Desktop</b>..</p>
+            <p>
+                Give it a try by looking for <b>Cellular Monitor</b> in the list of all apps in
+                <b>nRF Connect for Desktop</b>.
+            </p>
         </Alert>
         <Alert variant="info">
             Open the DevKit in <i>Select device</i> menu.
