@@ -1,4 +1,5 @@
 ## Version 1.0.8
+### Updates
 - Point out new, experimental app “Trace Collector V2 preview”
 
 ## Version 1.0.7
