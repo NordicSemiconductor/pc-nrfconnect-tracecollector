@@ -1,4 +1,8 @@
-## Versio 1.0.7
+## Version 1.0.8
+### Updates
+- Point out new, experimental app “Trace Collector V2 preview”
+
+## Version 1.0.7
 ### Fixes
 - Filtered out devices without serialport that caused crash #28
 
