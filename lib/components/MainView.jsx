@@ -45,15 +45,15 @@ const informationPanel = (
     <>
         <Alert variant="info" style={{ flexDirection: 'column' }}>
             <p>
-                A technical preview of the upcoming <b>Cellular Monitor</b> app has been released.
-                That app provides the same functionality as Trace Collector, however, it also
-                provides the functionality to convert some of the content of the trace files as
-                PCAP, which can then be visualized in e.g. <em>Wireshark</em>.
+                An experimental preview of the upcoming <b>Trace Collector V2</b> app has been
+                released. That app provides the same functionality as Trace Collector, however,
+                it also provides the functionality to convert some of the content of the trace
+                files as PCAP, which can then be visualized in e.g. <em>Wireshark</em>.
             </p>
 
             <p>
-                Give it a try by looking for <b>Cellular Monitor</b> in the list of all apps in
-                <b>nRF Connect for Desktop</b>.
+                Give it a try by looking for <b>Trace Collector V2 preview</b> in the list of all
+                apps in <b>nRF Connect for Desktop</b>.
             </p>
         </Alert>
         <Alert variant="info">
