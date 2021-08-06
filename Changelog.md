@@ -1,5 +1,5 @@
 ## 1.0.8 - 2021-07-02
-### Changed
+### Added
 - Point out new, experimental app “Trace Collector V2 preview”.
 
 ## 1.0.7 - 2021-02-12
@@ -12,7 +12,7 @@
 
 ## 1.0.5 - 2020-08-25
 ### Fixed
-- Fix device filter for Thingy:91.
+- Device filter for Thingy:91.
 
 ## 1.0.4 - 2020-08-21
 ### Changed
@@ -24,11 +24,11 @@
 
 ## 1.0.2 - 2020-02-27
 ### Fixed
-- Fix missing icon.
+- Missing icon.
 
 ## 1.0.1 - 2020-02-27
-### Changed
-- Add support for Thingy:91.
+### Added
+- Support for Thingy:91.
 
 ## 1.0.0 - 2019-07-03
 ### Changed
