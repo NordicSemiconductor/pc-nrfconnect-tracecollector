@@ -1,4 +1,4 @@
-/* Copyright (c) 2015 - 2018, Nordic Semiconductor ASA
+/* Copyright (c) 2015 - 2021, Nordic Semiconductor ASA
  *
  * All rights reserved.
  *
@@ -46,10 +46,6 @@ import './resources/css/index.scss';
 /* eslint-disable react/prop-types, no-unused-vars */
 
 const supportedBoards = ['PCA10090', 'PCA20035', 'THINGY91'];
-const platform = process.platform.slice(0, 3);
-
-// Prefer to use the serialport 8 property or fall back to the serialport 7 property
-const portPath = serialPort => serialPort.path || serialPort.comName;
 
 // App configuration
 // =================
@@ -71,61 +67,6 @@ export const config = {
         serialport: true,
     },
 };
-
-/**
- * Temporary workaround for macOS where serialports of PCA10090 can't be properly identified yet.
- * This function returns an array of devices where any device with many serialports are converted
- * to many devices with 1 serialport each, so the user will be able to select any of the ports.
- *
- * @param {Array<device>} coreDevices array of device-lister device objects
- * @param {bool} autoDeviceFilter indicates if functionality is desired or not toggled by the UI
- * @returns {Array<device>} fixed array
- */
-function fixDevices(coreDevices, autoDeviceFilter) {
-    const devices = coreDevices.map(device => {
-        const { serialNumber } = device;
-        const sn = serialNumber.toUpperCase();
-        if (sn.startsWith('PCA') || sn.startsWith('THINGY91')) {
-            const [b, s] = sn.split('_');
-            return {
-                ...device,
-                boardVersion: b,
-                serialNumber: s,
-            };
-        }
-        return device;
-    });
-    if (autoDeviceFilter) {
-        return devices;
-    }
-    const fixedDevices = [];
-    devices.forEach(device => {
-        const {
-            serialNumber,
-            boardVersion,
-            traits,
-            serialport,
-        } = device;
-        const temp = [{
-            serialNumber: `${serialNumber}#0`,
-            boardVersion,
-            traits,
-            serialport,
-        }];
-        let i = 1;
-        while (device[`serialport.${i}`]) {
-            temp[i] = {
-                boardVersion,
-                traits,
-                serialport: { ...device[`serialport.${i}`] },
-                serialNumber: `${serialNumber}#${i}`,
-            };
-            i += 1;
-        }
-        fixedDevices.push(...temp);
-    });
-    return fixedDevices;
-}
 
 // Component decoration
 // ====================
@@ -152,8 +93,7 @@ export function decorateDeviceSelector(DeviceSelector) {
         const filteredDevices = autoDeviceFilter
             ? devices.filter(d => supportedBoards.includes(d.boardVersion))
             : devices;
-        const fixedDevices = fixDevices(filteredDevices, autoDeviceFilter);
-        return <DeviceSelector {...rest} devices={fixedDevices} />;
+        return <DeviceSelector {...rest} devices={filteredDevices} />;
     };
 }
 
@@ -198,29 +138,6 @@ export function decorateSidePanel() {
  */
 export const reduceApp = reducers;
 
-/**
- * Pick the serialport that should belong to the modem on PCA10090
- * @param {Array<device>} serialports array of device-lister serialport objects
- * @returns {object} the selected serialport object
- */
-function pickSerialPort(serialports) {
-    if (serialports.length === 1) {
-        // In macOS case when serialports are split
-        return serialports[0];
-    }
-    switch (platform) {
-        case 'win':
-            return serialports.find(s => (/MI_0[34]/.test(s.pnpId)));
-        case 'lin':
-            return serialports.find(s => (/-if0[34]$/.test(s.pnpId)));
-        case 'dar':
-            // this doesn't work, but with fixDevices() can't happen
-            return serialports.find(s => (/3$/.test(portPath(s))));
-        default:
-    }
-    return undefined;
-}
-
 // Intercepting actions with middleware
 // ====================================
 
@@ -247,15 +164,9 @@ export function middleware({ dispatch }) {
         }
 
         if (action.type === 'DEVICE_SELECTED') {
-            const { device } = action;
-            const serialports = Object.keys(device)
-                .filter(k => k.startsWith('serialport'))
-                .map(k => device[k]);
-
-            const serialport = pickSerialPort(serialports);
+            const serialport = action.device.serialPorts.slice(-1)[0];
             if (serialport) {
-                console.log(serialport);
-                dispatch(DeviceActions.open(portPath(serialport)));
+                dispatch(DeviceActions.open(serialport.comName));
             } else {
                 logger.error('Couldn\'t identify serial port');
                 dispatch({ type: 'DEVICE_DESELECTED' });
