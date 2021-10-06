@@ -5,25 +5,27 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import Alert from 'react-bootstrap/Alert';
 import Card from 'react-bootstrap/Card';
 import { basename } from 'path';
 import prettyBytes from 'pretty-bytes';
+import PropTypes from 'prop-types';
 
 const informationPanel = (
     <>
         <Alert variant="info" style={{ flexDirection: 'column' }}>
             <p>
-                An experimental preview of the upcoming <b>Trace Collector V2</b> app has been
-                released. That app provides the same functionality as Trace Collector, however,
-                it also provides the functionality to convert some of the content of the trace
-                files as PCAP, which can then be visualized in e.g. <em>Wireshark</em>.
+                An experimental preview of the upcoming{' '}
+                <b>Trace Collector V2</b> app has been released. That app
+                provides the same functionality as Trace Collector, however, it
+                also provides the functionality to convert some of the content
+                of the trace files as PCAP, which can then be visualized in e.g.{' '}
+                <em>Wireshark</em>.
             </p>
 
             <p>
-                Give it a try by looking for <b>Trace Collector V2 preview</b> in the list of all
-                apps in <b>nRF Connect for Desktop</b>.
+                Give it a try by looking for <b>Trace Collector V2 preview</b>{' '}
+                in the list of all apps in <b>nRF Connect for Desktop</b>.
             </p>
         </Alert>
         <Alert variant="info">
@@ -45,15 +47,17 @@ const MainView = ({
             <Card className="content" variant="primary">
                 <div className="stats">
                     {freeDiskSpace && (
-                        <p>Disk space: {prettyBytes(freeDiskSpace)} free
-                            of {prettyBytes(totalDiskSpace)}
+                        <p>
+                            Disk space: {prettyBytes(freeDiskSpace)} free of{' '}
+                            {prettyBytes(totalDiskSpace)}
                         </p>
                     )}
                     {bytesWritten && (
                         <p>Trace size: {prettyBytes(bytesWritten)}</p>
                     )}
                     {filePath && (
-                        <p>Latest tracefile:&nbsp;
+                        <p>
+                            Latest tracefile:&nbsp;
                             {basename(filePath)}
                         </p>
                     )}

@@ -6,18 +6,21 @@
 
 import React from 'react';
 import renderer from 'react-test-renderer';
+
 import MainView from '../MainView';
 
 describe('MainView', () => {
     it('should render component', () => {
-        expect(renderer.create(
-            <MainView
-                isConnected
-                bytesWritten={0}
-                freeDiskSpace={1000}
-                totalDiskSpace={2000}
-                filePath="/path/to/file"
-            />,
-        )).toMatchSnapshot();
+        expect(
+            renderer.create(
+                <MainView
+                    isConnected
+                    bytesWritten={0}
+                    freeDiskSpace={1000}
+                    totalDiskSpace={2000}
+                    filePath="/path/to/file"
+                />
+            )
+        ).toMatchSnapshot();
     });
 });

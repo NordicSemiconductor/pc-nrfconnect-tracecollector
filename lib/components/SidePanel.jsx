@@ -5,10 +5,10 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
+import Form from 'react-bootstrap/Form';
+import PropTypes from 'prop-types';
 
 const SidePanel = ({
     isConnected,
@@ -31,7 +31,7 @@ const SidePanel = ({
                         onClick={toggleCapture}
                         disabled={!isConnected}
                     >
-                        { running ? 'Stop' : 'Start' } Capture
+                        {running ? 'Stop' : 'Start'} Capture
                     </Button>
                     <Button
                         onClick={showItemInFolder}
@@ -49,7 +49,9 @@ const SidePanel = ({
                 <Form.Group controlId="portFilterCheck">
                     <Form.Check
                         type="checkbox"
-                        onChange={e => autoDeviceFilterToggled(e.target.checked)}
+                        onChange={e =>
+                            autoDeviceFilterToggled(e.target.checked)
+                        }
                         checked={autoDeviceFilter}
                         label="Auto device/port filter"
                     />

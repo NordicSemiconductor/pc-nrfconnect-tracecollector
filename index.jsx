@@ -6,11 +6,13 @@
 
 import React from 'react';
 import { logger } from 'nrfconnect/core';
-import MainView from './lib/containers/mainView';
-import SidePanel from './lib/containers/sidePanel';
+
 import * as DeviceActions from './lib/actions/deviceActions';
 import { loadSettings } from './lib/actions/uiActions';
+import MainView from './lib/containers/mainView';
+import SidePanel from './lib/containers/sidePanel';
 import reducers from './lib/reducers';
+
 import './resources/css/index.scss';
 
 /* eslint-disable react/prop-types, no-unused-vars */
@@ -44,7 +46,8 @@ export const config = {
 export function mapDeviceSelectorState(state, props) {
     return {
         autoDeviceFilter: state.app.ui.autoDeviceFilter,
-        portIndicatorStatus: (state.app.device.deviceName !== null) ? 'on' : 'off',
+        portIndicatorStatus:
+            state.app.device.deviceName !== null ? 'on' : 'off',
         ...props,
     };
 }
@@ -76,9 +79,7 @@ export function decorateDeviceSelector(DeviceSelector) {
  * @returns {Function} A new React component.
  */
 export function decorateMainView() {
-    return props => (
-        <MainView {...props} />
-    );
+    return props => <MainView {...props} />;
 }
 
 /**
@@ -90,9 +91,7 @@ export function decorateMainView() {
  * @returns {Function} A new React component.
  */
 export function decorateSidePanel() {
-    return props => (
-        <SidePanel {...props} />
-    );
+    return props => <SidePanel {...props} />;
 }
 
 // Adding information to state
@@ -138,7 +137,7 @@ export function middleware({ dispatch }) {
             if (serialport) {
                 dispatch(DeviceActions.open(serialport.comName));
             } else {
-                logger.error('Couldn\'t identify serial port');
+                logger.error("Couldn't identify serial port");
                 dispatch({ type: 'DEVICE_DESELECTED' });
                 return;
             }
