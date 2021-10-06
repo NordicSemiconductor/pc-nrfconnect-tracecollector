@@ -150,6 +150,6 @@ export function middleware({ dispatch }) {
     };
 }
 
-export function onReady(dispatch, getState) {
+export function onReady(dispatch) {
     dispatch(loadSettings());
 }
