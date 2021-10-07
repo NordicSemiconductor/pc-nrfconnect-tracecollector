@@ -41,29 +41,31 @@ const MainView = ({
     totalDiskSpace,
     filePath,
 }) => (
-    <div className="core-main-view">
-        {!isConnected && informationPanel}
-        {isConnected && (
-            <Card className="content" variant="primary">
-                <div className="stats">
-                    {freeDiskSpace && (
-                        <p>
-                            Disk space: {prettyBytes(freeDiskSpace)} free of{' '}
-                            {prettyBytes(totalDiskSpace)}
-                        </p>
-                    )}
-                    {bytesWritten && (
-                        <p>Trace size: {prettyBytes(bytesWritten)}</p>
-                    )}
-                    {filePath && (
-                        <p>
-                            Latest tracefile:&nbsp;
-                            {basename(filePath)}
-                        </p>
-                    )}
-                </div>
-            </Card>
-        )}
+    <div className="main-view-container">
+        <div className="main-view">
+            {!isConnected && informationPanel}
+            {isConnected && (
+                <Card className="content" variant="primary">
+                    <div className="stats">
+                        {freeDiskSpace && (
+                            <p>
+                                Disk space: {prettyBytes(freeDiskSpace)} free of{' '}
+                                {prettyBytes(totalDiskSpace)}
+                            </p>
+                        )}
+                        {bytesWritten && (
+                            <p>Trace size: {prettyBytes(bytesWritten)}</p>
+                        )}
+                        {filePath && (
+                            <p>
+                                Latest tracefile:&nbsp;
+                                {basename(filePath)}
+                            </p>
+                        )}
+                    </div>
+                </Card>
+            )}
+        </div>
     </div>
 );
 

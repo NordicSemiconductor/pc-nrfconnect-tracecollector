@@ -6,8 +6,8 @@
 
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
+import { Group, SidePanel as SharedSidepanel } from 'pc-nrfconnect-shared';
 import PropTypes from 'prop-types';
 
 const SidePanel = ({
@@ -19,46 +19,41 @@ const SidePanel = ({
     filePath,
     showItemInFolder,
 }) => (
-    <div className="core-side-panel">
-        <Card>
-            <Card.Header>Capture</Card.Header>
-            <Card.Body>
-                <div className="d-flex flex-column">
-                    <Button
-                        className="capture"
-                        variant={running ? 'danger' : 'primary'}
-                        size="lg"
-                        onClick={toggleCapture}
-                        disabled={!isConnected}
-                    >
-                        {running ? 'Stop' : 'Start'} Capture
-                    </Button>
-                    <Button
-                        onClick={showItemInFolder}
-                        disabled={!filePath}
-                        variant="light"
-                    >
-                        Show capture in folder
-                    </Button>
-                </div>
-            </Card.Body>
-        </Card>
-        <Card>
-            <Card.Header>Settings</Card.Header>
-            <Card.Body>
-                <Form.Group controlId="portFilterCheck">
-                    <Form.Check
-                        type="checkbox"
-                        onChange={e =>
-                            autoDeviceFilterToggled(e.target.checked)
-                        }
-                        checked={autoDeviceFilter}
-                        label="Auto device/port filter"
-                    />
-                </Form.Group>
-            </Card.Body>
-        </Card>
-    </div>
+    <SharedSidepanel>
+        <Group heading="Serialport Trace Capture">
+            Copy this over from the CM {/* FIXME */}
+        </Group>
+        <Group heading="Capture">
+            <div className="d-flex flex-column">
+                <Button
+                    className="capture"
+                    variant={running ? 'danger' : 'primary'}
+                    size="lg"
+                    onClick={toggleCapture}
+                    disabled={!isConnected}
+                >
+                    {running ? 'Stop' : 'Start'} Capture
+                </Button>
+                <Button
+                    onClick={showItemInFolder}
+                    disabled={!filePath}
+                    variant="light"
+                >
+                    Show capture in folder
+                </Button>
+            </div>
+        </Group>
+        <Group heading="Device filter">
+            <Form.Group controlId="portFilterCheck">
+                <Form.Check
+                    type="checkbox"
+                    onChange={e => autoDeviceFilterToggled(e.target.checked)}
+                    checked={autoDeviceFilter}
+                    label="Show only supported devices"
+                />
+            </Form.Group>
+        </Group>
+    </SharedSidepanel>
 );
 
 SidePanel.propTypes = {
