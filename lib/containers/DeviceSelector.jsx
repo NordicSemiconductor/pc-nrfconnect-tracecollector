@@ -24,9 +24,14 @@ export default () => {
 
     const openPort = useCallback(
         device => {
-            const tracePort = last(device.serialPorts);
+            const ports = device.serialPorts
+                .filter(port => port.comName != null)
+                .map(port => port.comName);
+            dispatch(DeviceActions.availablePortsAction(ports));
+
+            const tracePort = last(ports);
             if (tracePort) {
-                dispatch(DeviceActions.open(tracePort.comName));
+                dispatch(DeviceActions.open(tracePort));
             } else {
                 logger.error("Couldn't identify serial port");
                 dispatch({ type: 'DEVICE_DESELECTED' });
@@ -37,6 +42,7 @@ export default () => {
 
     const closePort = useCallback(() => {
         dispatch(DeviceActions.close());
+        dispatch(DeviceActions.availablePortsAction());
     }, [dispatch]);
 
     const deviceFilter = useCallback(

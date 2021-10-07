@@ -10,6 +10,8 @@ import Form from 'react-bootstrap/Form';
 import { Group, SidePanel as SharedSidepanel } from 'pc-nrfconnect-shared';
 import PropTypes from 'prop-types';
 
+import Serialports from './Serialports';
+
 const SidePanel = ({
     isConnected,
     running,
@@ -20,8 +22,8 @@ const SidePanel = ({
     showItemInFolder,
 }) => (
     <SharedSidepanel>
-        <Group heading="Serialport Trace Capture">
-            Copy this over from the CM {/* FIXME */}
+        <Group heading="Trace Capture Port">
+            <Serialports disabled={!isConnected || running} />
         </Group>
         <Group heading="Capture">
             <div className="d-flex flex-column">
