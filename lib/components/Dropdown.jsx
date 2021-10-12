@@ -10,6 +10,8 @@ import { arrayOf, bool, func, number, string } from 'prop-types';
 
 import chevron from './chevron.svg';
 
+import './Dropdown.scss';
+
 const Dropdown = ({
     label,
     items,
