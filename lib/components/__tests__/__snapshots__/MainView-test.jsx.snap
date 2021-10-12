@@ -2,26 +2,31 @@
 
 exports[`MainView should render component 1`] = `
 <div
-  className="core-main-view"
+  className="main-view-container"
 >
   <div
-    className="content card"
-    variant="primary"
+    className="main-view"
   >
     <div
-      className="stats"
+      className="content card"
+      variant="primary"
     >
-      <p>
-        Disk space: 
-        1 kB
-         free of 
-        2 kB
-      </p>
-      0
-      <p>
-        Latest tracefile: 
-        file
-      </p>
+      <div
+        className="stats"
+      >
+        <p>
+          Disk space: 
+          1 kB
+           free of
+           
+          2 kB
+        </p>
+        0
+        <p>
+          Latest tracefile: 
+          file
+        </p>
+      </div>
     </div>
   </div>
 </div>

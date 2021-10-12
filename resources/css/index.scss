@@ -1,42 +1,33 @@
+/*
+ * Copyright (c) 2021 Nordic Semiconductor ASA
+ *
+ * SPDX-License-Identifier: LicenseRef-Nordic-4-Clause
+ */
+
 // This file is imported by index.jsx, and may contain styles for the app.
-.core-main-area {
-    min-width: initial;
+
+
+.core19-side-panel {
+
+    .form-check-input {
+        margin-top: 0.05rem;
+    }
+    .btn:not(:last-child) {
+        margin-bottom: 8px;
+    }
 }
 
-.core-side-panel {
-    height: 100%;
-    flex: 0 0 300px;
+.main-view-container {
     display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-    .radio, .checkbox {
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
-    .card-body {
-        padding: 15px;
-        background-color: #f5f5f5;
-        .btn {
-            width: 100%;
-        }
-        .btn:not(:last-child) {
-            margin-bottom: 8px;
-        }
-    }
-    .card {
-        margin-bottom: 15px;
-    }
-    .form-group {
-        margin-bottom: 0;
-    }
+    height: 100%;
 }
 
-
-.core-main-view {
+.main-view {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
 
     .btn {
         width: fit-content;

@@ -1,3 +1,7 @@
+## Unreleased
+### Changed
+- Use new look & feel of nRF Connect for Desktop.
+
 ## 1.0.8 - 2021-07-02
 ### Added
 - Point out new, experimental app “Trace Collector V2 preview”.
