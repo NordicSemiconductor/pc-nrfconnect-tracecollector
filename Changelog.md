@@ -1,4 +1,6 @@
 ## Unreleased
+### Added
+- Documentation section to `About` pane
 ### Changed
 - Use new look & feel of nRF Connect for Desktop.
 
