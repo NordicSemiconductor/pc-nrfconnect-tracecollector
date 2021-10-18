@@ -1,6 +1,6 @@
 {
   "name": "pc-nrfconnect-tracecollector",
-  "version": "2.0.0-pre2",
+  "version": "2.0.0-pre3",
   "description": "Capture modem trace of nRF91",
   "displayName": "Trace Collector",
   "repository": {
