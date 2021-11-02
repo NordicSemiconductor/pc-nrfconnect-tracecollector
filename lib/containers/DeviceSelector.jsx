@@ -34,7 +34,7 @@ export default () => {
                 dispatch(DeviceActions.open(tracePort));
             } else {
                 logger.error("Couldn't identify serial port");
-                dispatch({ type: 'DEVICE_DESELECTED' });
+                dispatch({ type: 'device/deselectDevice' });
             }
         },
         [dispatch]
