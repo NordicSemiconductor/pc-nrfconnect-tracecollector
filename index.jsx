@@ -7,6 +7,7 @@
 import React from 'react';
 import { App } from 'pc-nrfconnect-shared';
 
+import DocumentationSections from './lib/components/DocumentationSections';
 import DeviceSelector from './lib/containers/DeviceSelector';
 import Main from './lib/containers/mainView';
 import SidePanel from './lib/containers/sidePanel';
@@ -20,5 +21,6 @@ export default () => (
         sidePanel={<SidePanel />}
         deviceSelect={<DeviceSelector />}
         panes={[{ name: 'Trace Collector', Main }]}
+        documentation={DocumentationSections}
     />
 );

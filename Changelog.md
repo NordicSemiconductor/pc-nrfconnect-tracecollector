@@ -1,4 +1,10 @@
-## Unreleased
+## 1.1.1 - 2021-11-03
+### Fixed
+- Icon color should match other apps
+
+## 1.1.0 - 2021-11-01
+### Added
+- Documentation section to `About` pane.
 ### Changed
 - Use new look & feel of nRF Connect for Desktop.
 
