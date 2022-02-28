@@ -1,4 +1,4 @@
-## 1.1.2
+## 1.1.2 - 2022-02-28
 ### Changed
 - Use new icon set.
 - Stop using legacy api for internal functionality.
