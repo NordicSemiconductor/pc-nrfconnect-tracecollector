@@ -1,6 +1,7 @@
-## Unreleased
+## 1.1.2
 ### Changed
 - Use new icon set.
+- Stop using legacy api for internal functionality.
 
 ## 1.1.1 - 2021-11-03
 ### Fixed
