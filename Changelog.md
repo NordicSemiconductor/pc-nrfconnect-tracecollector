@@ -1,7 +1,7 @@
 ## 1.1.2 - 2022-02-28
 ### Changed
 - Use new icon set.
-- Stop using legacy api for internal functionality.
+- Made compatible with next version of nRF Connect for Desktop.
 
 ## 1.1.1 - 2021-11-03
 ### Fixed
