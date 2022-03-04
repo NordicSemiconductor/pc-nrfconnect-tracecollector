@@ -22,7 +22,6 @@
     "dev": "nrfconnect-scripts build-watch",
     "webpack": "nrfconnect-scripts build-dev",
     "build": "nrfconnect-scripts build-prod",
-    "lint-init": "nrfconnect-scripts lint-init",
     "lint": "nrfconnect-scripts lint lib index.jsx",
     "lintfix": "nrfconnect-scripts lint --fix lib index.jsx",
     "nordic-publish": "nrfconnect-scripts nordic-publish",
