@@ -1,3 +1,8 @@
+## Unreleased
+
+### Fixed
+- Did not display all serialport devices.
+
 ## 1.1.2 - 2022-02-28
 ### Changed
 - Use new icon set.
