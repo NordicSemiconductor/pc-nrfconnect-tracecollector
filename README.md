@@ -1,6 +1,6 @@
 # nRF Connect Trace Collector
 
-[![Build Status](https://dev.azure.com/NordicSemiconductor/Wayland/_apis/build/status/pc-nrfconnect-tracecollector?branchName=master)](https://dev.azure.com/NordicSemiconductor/Wayland/_build/latest?definitionId=16&branchName=master)
+[![Build Status](https://dev.azure.com/NordicSemiconductor/Wayland/_apis/build/status/pc-nrfconnect-tracecollector?branchName=main)](https://dev.azure.com/NordicSemiconductor/Wayland/_build/latest?definitionId=16&branchName=main)
 [![License](https://img.shields.io/badge/license-Modified%20BSD%20License-blue.svg)](LICENSE)
 
 *nRF Connect Trace Collector* is a cross-platform tool to capture modem trace of nRF91.
