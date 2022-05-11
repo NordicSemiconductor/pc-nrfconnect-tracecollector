@@ -11,7 +11,7 @@ import { DeviceSelector, logger } from 'pc-nrfconnect-shared';
 import * as DeviceActions from '../actions/deviceActions';
 
 const deviceListing = {
-    serialPort: true,
+    serialPorts: true,
 };
 
 const last = list => list.slice(-1)[0];
