@@ -32,7 +32,7 @@
     "devDependencies": {
         "check-disk-space": "^1.5.0",
         "electron-store": "^8.0.1",
-        "pc-nrfconnect-shared": "github:NordicSemiconductor/pc-nrfconnect-shared#v6.2.2",
+        "pc-nrfconnect-shared": "https://github.com/NordicSemiconductor/pc-nrfconnect-shared#v6.2.2",
         "pretty-bytes": "^5.1.0",
         "react": "17.0.2",
         "react-dom": "17.0.2",
