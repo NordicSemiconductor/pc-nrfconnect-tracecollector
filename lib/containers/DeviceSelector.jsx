@@ -11,6 +11,7 @@ import { DeviceSelector, logger } from 'pc-nrfconnect-shared';
 import * as DeviceActions from '../actions/deviceActions';
 
 const deviceListing = {
+    jlink: true,
     serialPorts: true,
 };
 
