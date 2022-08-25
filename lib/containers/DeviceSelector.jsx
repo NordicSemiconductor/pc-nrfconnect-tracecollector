@@ -11,6 +11,7 @@ import { DeviceSelector, logger } from 'pc-nrfconnect-shared';
 import * as DeviceActions from '../actions/deviceActions';
 
 const deviceListing = {
+    jlink: true,
     serialPorts: true,
 };
 
@@ -52,7 +53,10 @@ export default () => {
             }
 
             const supportedBoards = ['PCA10090', 'PCA20035', 'THINGY91'];
-            return supportedBoards.includes(device.boardVersion);
+            return (
+                supportedBoards.includes(device.jlink?.boardVersion) ||
+                supportedBoards.includes(device.serialNumber.split('_')[0])
+            );
         },
         [autoDeviceFilter]
     );
