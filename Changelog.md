@@ -1,3 +1,9 @@
+## 1.1.4 = Unreleased
+
+### Changed
+
+-   Support for launcher v3.13.0.
+
 ## 1.1.3 - 2022-09-05
 
 ### Fixed
