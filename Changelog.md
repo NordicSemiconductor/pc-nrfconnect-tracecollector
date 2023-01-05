@@ -1,8 +1,8 @@
-## 1.1.4 = Unreleased
+## 1.1.4 - Unreleased
 
 ### Changed
 
--   Support for launcher v3.13.0.
+-   Support for launcher v4.0.0.
 
 ## 1.1.3 - 2022-09-05
 
