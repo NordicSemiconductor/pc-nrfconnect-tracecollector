@@ -35,10 +35,9 @@
     },
     "devDependencies": {
         "check-disk-space": "^1.5.0",
-        "pc-nrfconnect-shared": "git+https://github.com/NordicSemiconductor/pc-nrfconnect-shared.git#v6.14.3",
+        "pc-nrfconnect-shared": "github:NordicSemiconductor/pc-nrfconnect-shared#v7",
         "pretty-bytes": "^5.1.0"
     },
-    "dependencies": {},
     "eslintConfig": {
         "extends": "./node_modules/pc-nrfconnect-shared/config/eslintrc"
     },
