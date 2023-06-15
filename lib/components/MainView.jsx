@@ -18,16 +18,16 @@ const informationPanel = (
                 <em>Deprecation notice</em>
             </p>
             <p>
-                <b>Cellular monitor</b> app has been released. That app provides
-                the same functionality as Trace Collector, however, it also
-                provides the functionality to convert some of the content of the
-                trace files as PCAP, which can then be visualized in e.g.{' '}
-                <em>Wireshark</em>.
+                nRF Connect for Desktop <strong>Cellular Monitor</strong> app
+                has been released. This provides the same functionality as Trace
+                Collector and Link Monitor, and supports many new features,
+                including PCAP format trace for use in third-party applications
+                such as Wireshark. We recommend you try it out.
             </p>
 
             <p>
-                Give it a try by looking for <b>Cellular Monitor</b> in the list
-                of all apps in <b>nRF Connect for Desktop</b>.
+                <strong>Cellular Monitor</strong> is installed from{' '}
+                <strong>nRF Connect for Desktop</strong>.
             </p>
         </Alert>
         <Alert variant="info">
