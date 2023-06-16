@@ -2,7 +2,7 @@
     "name": "pc-nrfconnect-tracecollector",
     "version": "1.1.4",
     "displayName": "Trace Collector",
-    "description": "Capture nRF91 modem trace",
+    "description": "Deprecated: Capture nRF91 modem trace",
     "homepage": "https://github.com/NordicSemiconductor/pc-nrfconnect-tracecollector",
     "repository": {
         "type": "git",
