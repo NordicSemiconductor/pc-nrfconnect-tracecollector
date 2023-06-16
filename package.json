@@ -17,6 +17,7 @@
     "files": [
         "dist/",
         "resources/icon.*",
+        "Changelog.md",
         "LICENSE"
     ],
     "scripts": {
