@@ -1,0 +1,76 @@
+site_name: nRF Connect Trace Collector documentation
+site_url:
+use_directory_urls: false
+
+theme:
+  name: material
+  palette:
+    - scheme: custom-blue
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to dark mode
+    - scheme: custom-blue-dark
+      toggle:
+        icon: material/lightbulb
+        name: Switch to light mode
+  # logo: assets/logo.png
+  # favicon: assets/logo.png
+  features:
+    - content.code.annotate
+    - content.tooltips
+    - content.tabs.link
+    - navigation.indexes
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - toc.follow
+
+
+extra_css:
+  - stylesheets/style.css
+
+copyright:
+  Copyright &copy; 2023
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - md_in_html
+  - meta
+  - pymdownx.details
+  - pymdownx.keys
+  - pymdownx.tabbed
+  - pymdownx.superfences
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - toc:
+      permalink: true
+      toc_depth: 4
+
+plugins:
+  - macros
+  - search
+
+
+extra:
+  test: This is a test abbreviation snippet
+
+nav:
+  - Home: index.md
+  - Installing the Trace Collector app: installing.md
+  - Overview and user interface: overview.md
+  - Collecting a modem trace for the nRF9160 DK:
+    - Preparing the board for trace collection: nrf9160_preparing.md
+    - Enabling tracing in the application: nrf9160_enabling.md
+    - Capturing the modem trace: nrf9160_capturing.md
+  - Collecting a modem trace for Nordic Thingy:91:
+    - Preparing the board for trace collection: thingy91_preparing.md
+    - Enabling tracing in the application: thingy91_enabling.md
+    - Capturing the modem trace: thingy91_capturing.md
+  - Collecting a modem trace for a custom board:
+    - Preparing the board for trace collection: custom_preparing.md
+    - Enabling tracing in the application: custom_enabling.md
+    - Capturing the modem trace: custom_capturing.md
+  - Revision history: revision_history.md
