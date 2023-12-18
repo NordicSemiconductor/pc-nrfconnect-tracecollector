@@ -39,8 +39,5 @@
         "pc-nrfconnect-shared": "github:NordicSemiconductor/pc-nrfconnect-shared#v7",
         "pretty-bytes": "^5.1.0"
     },
-    "eslintConfig": {
-        "extends": "./eslint.config.js"
-    },
     "prettier": "./node_modules/pc-nrfconnect-shared/config/prettier.config.js"
 }
