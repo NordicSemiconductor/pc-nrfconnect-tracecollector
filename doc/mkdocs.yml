@@ -73,4 +73,4 @@ nav:
     - Preparing the board for trace collection: custom_preparing.md
     - Enabling tracing in the application: custom_enabling.md
     - Capturing the modem trace: custom_capturing.md
-  - Revision history: revision_history.md
+  - Revision history: revision_history_tc.md
