@@ -1,3 +1,9 @@
+## 1.1.6 - UNRELEASED
+
+### Changed
+
+-   Updated documentation links to point to the TechDocs platform.
+
 ## 1.1.5 - 2023-06-19
 
 ### Added
