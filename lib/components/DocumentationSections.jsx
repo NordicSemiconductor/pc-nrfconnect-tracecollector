@@ -10,10 +10,10 @@ import { DocumentationSection } from 'pc-nrfconnect-shared';
 const DocumentationSections = [
     <DocumentationSection
         key="infocenter"
-        linkLabel="Go to Infocenter"
-        link="https://infocenter.nordicsemi.com/topic/ug_trace_collector/UG/trace_collector/intro.html"
+        linkLabel="Go to TechDocs"
+        link="https://docs.nordicsemi.com/bundle/nrf-connect-tracecollector/page/index.html"
     >
-        Visit our Infocenter for more documentation about using the app.
+        Visit our Technical Documentation for more documentation about using the app.
     </DocumentationSection>,
 ];
 
